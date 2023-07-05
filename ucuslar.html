@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hakkımızda</title>
+    <title>Anasayfa</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -39,26 +39,25 @@
             </div>
         </div>
     </header>
-
-    <section class="content-title">
+    <section class="content-title contact-us-background">
         <div class="container">
-            <h1>Hakkımızda</h1>
-        </div>
-    </section>
-
-    <section class="content">
-        <div class="container">
-            <p>Lorem Ipsum, kısaca Lipsum, masaüstü yayıncılık ve basın yayın sektöründe kullanılan taklit yazı bloğu olarak tanımlanır. Lipsum, oluşturulacak şablon ve taslaklarda içerik yerine geçerek yazı bloğunu doldurmak için kullanılır.</p>
-            <p>Lorem Ipsum, kısaca Lipsum, masaüstü yayıncılık ve basın yayın sektöründe kullanılan taklit yazı bloğu olarak tanımlanır. Lipsum, oluşturulacak şablon ve taslaklarda içerik yerine geçerek yazı bloğunu doldurmak için kullanılır.</p>
-            <p>Lorem Ipsum, kısaca Lipsum, masaüstü yayıncılık ve basın yayın sektöründe kullanılan taklit yazı bloğu olarak tanımlanır. Lipsum, oluşturulacak şablon ve taslaklarda içerik yerine geçerek yazı bloğunu doldurmak için kullanılır.</p>
-            <p>Lorem Ipsum, kısaca Lipsum, masaüstü yayıncılık ve basın yayın sektöründe kullanılan taklit yazı bloğu olarak tanımlanır. Lipsum, oluşturulacak şablon ve taslaklarda içerik yerine geçerek yazı bloğunu doldurmak için kullanılır.</p>
-            <p>Lorem Ipsum, kısaca Lipsum, masaüstü yayıncılık ve basın yayın sektöründe kullanılan taklit yazı bloğu olarak tanımlanır. Lipsum, oluşturulacak şablon ve taslaklarda içerik yerine geçerek yazı bloğunu doldurmak için kullanılır.</p>
-            <p>Lorem Ipsum, kısaca Lipsum, masaüstü yayıncılık ve basın yayın sektöründe kullanılan taklit yazı bloğu olarak tanımlanır. Lipsum, oluşturulacak şablon ve taslaklarda içerik yerine geçerek yazı bloğunu doldurmak için kullanılır.</p>
-            <p>Lorem Ipsum, kısaca Lipsum, masaüstü yayıncılık ve basın yayın sektöründe kullanılan taklit yazı bloğu olarak tanımlanır. Lipsum, oluşturulacak şablon ve taslaklarda içerik yerine geçerek yazı bloğunu doldurmak için kullanılır.</p>
-            <p>Lorem Ipsum, kısaca Lipsum, masaüstü yayıncılık ve basın yayın sektöründe kullanılan taklit yazı bloğu olarak tanımlanır. Lipsum, oluşturulacak şablon ve taslaklarda içerik yerine geçerek yazı bloğunu doldurmak için kullanılır.</p>
+            <h1>Uçuşlar</h1>
         </div>
     </section>
     
+    <ul id="dataList"></ul>
+  <div class="templates">
+    <div id="listItem">
+      <div class="row1">
+        <div class="title"></div>
+        <div class="amount"></div>
+      </div>
+      <div class="row2"><div class="description"></div></div>
+    </div>
+  </div>
+
+
+
     <footer>
         <div class="footer_content">
              <div class="footer_wrapper">
@@ -88,7 +87,6 @@
                         <li><a href="./iletisim.html">İletişim</a></li>
                         <li><a href="./urunlerimiz.html">Ürünlerimiz</a></li>
                         <li><a href="./hakkimizda.html">Hakkımızda</a></li>
-                        <li><a href="ucuslar.html">Uçuşlar</a></li>
                      </ul>
                  </div>
              </div>
@@ -102,7 +100,13 @@
         </div>
      </footer>
  
- <script src="https://kit.fontawesome.com/35e8266fdf.js" crossorigin="anonymous"></script>
 
+<script src="./assets/js/custom.js"></script>
+<script>
+var dataObject = JSON.parse(jsonData);
+console.log(dataObject);
+console.log("burası çalıştı");
+</script>
+ <script src="https://kit.fontawesome.com/35e8266fdf.js" crossorigin="anonymous"></script>
 </body>
 </html>
