@@ -45,17 +45,30 @@
         </div>
     </section>
     
-    <ul id="dataList"></ul>
-  <div class="templates">
-    <div id="listItem">
-      <div class="row1">
-        <div class="title"></div>
-        <div class="amount"></div>
-      </div>
-      <div class="row2"><div class="description"></div></div>
-    </div>
-  </div>
-
+    <section class="ucuslar_container">
+        <div id="siralama" class="siralama">
+            <label for="Sıralama">Sıralama</label>
+            <button onclick="sirketAdinaGoreSirala()">Şirket Adı</button>
+            <button onclick="fiyatAzdanCogaGoreSirala()">Fiyat</button>
+            <button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>
+            <button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>
+            <button onclick="ucusSuresiAzdanCokaSiralama()">Uçuş Süresi</button>
+        </div>
+        <div class="ucuslar_table_container">
+            <table id="ucuslar_table">
+                <tr>
+                  <th>#</th>
+                  <th>Şirket</th>
+                  <th>Kalkış Yeri</th>
+                  <th>İniş Yeri</th>
+                  <th>Kalkış Saati</th>
+                  <th>İniş Saati</th>
+                  <th>Fiyat</th>
+                  <th>Uçuş Süresi</th>
+                </tr>
+              </table>
+        </div>
+    </section>
 
 
     <footer>
@@ -103,9 +116,522 @@
 
 <script src="./assets/js/custom.js"></script>
 <script>
-var dataObject = JSON.parse(jsonData);
-console.log(dataObject);
-console.log("burası çalıştı");
+//Tabloyu Oluşturma
+console.log(jsonData.response.itineraryList[0].flightOptionList);
+console.log("Kalkış Yeri: "+ jsonData.response.itineraryList[0].flightOptionList[0].departureAirport.name);
+console.log("İniş Yeri: "+ jsonData.response.itineraryList[0].flightOptionList[0].arrivalAirport.name);
+console.log("Kalkış Zamanı: "+ jsonData.response.itineraryList[0].flightOptionList[0].departureTime.slice(11,16));
+console.log("İniş Zamanı: "+ jsonData.response.itineraryList[0].flightOptionList[0].arrivalTime.slice(11,16));
+console.log("Fiyat: "+ jsonData.response.itineraryList[0].flightOptionList[0].fareOptionList[0].totalPriceInRequestedCurrency);
+console.log("Uçuş Zamanı: "+ jsonData.response.itineraryList[0].flightOptionList[0].flightList[0].durationInMinutes);
+console.log("Şirket: " + jsonData.response.itineraryList[0].flightOptionList[0].flightList[0].flightOperator.name);
+
+for (let i = 0; i < jsonData.response.itineraryList[0].flightOptionList.length; i++) {
+    var kalkis_zamani = jsonData.response.itineraryList[0].flightOptionList[i].departureTime.slice(11,16);
+var inis_zamani = jsonData.response.itineraryList[0].flightOptionList[i].arrivalTime.slice(11,16);
+var kalkis_yeri = jsonData.response.itineraryList[0].flightOptionList[i].departureAirport.name;
+var inis_yeri = jsonData.response.itineraryList[0].flightOptionList[i].arrivalAirport.name;
+var fiyat = jsonData.response.itineraryList[0].flightOptionList[i].fareOptionList[0].totalPriceInRequestedCurrency;
+var ucus_zamani = jsonData.response.itineraryList[0].flightOptionList[i].flightList[0].durationInMinutes;
+var sirket = jsonData.response.itineraryList[0].flightOptionList[i].flightList[0].flightOperator.name;
+var table = document.getElementById("ucuslar_table");
+var satir = '<tr>'+
+    '<td>'+(i+1) +'</td>'+
+    '<td>'+sirket +'</td>'+
+    '<td>'+kalkis_yeri +'</td>'+
+    '<td>'+inis_yeri +'</td>'+
+    '<td>'+kalkis_zamani +'</td>'+
+    '<td>'+inis_zamani +'</td>'+
+    '<td>'+fiyat +'</td>'+
+    '<td>'+ucus_zamani +'</td>'+
+        '</tr>';
+
+table.innerHTML += satir;
+    
+}
+
+// Fiyat Azdan Çoğa Sıralama
+function fiyatAzdanCogaGoreSirala(){
+    var table = document.getElementById("ucuslar_table");
+    var deneme = jsonData.response.itineraryList[0].flightOptionList.sort(function(a, b){
+    return a.fareOptionList[0].totalPriceInRequestedCurrency - b.fareOptionList[0].totalPriceInRequestedCurrency;
+    
+    
+});
+
+    table.innerHTML = "<tr>"+
+        "<th>#</th>"+
+        "<th>Şirket</th>"+
+        "<th>Kalkış Yeri</th>"+
+        "<th>İniş Yeri</th>"+
+        "<th>Kalkış Saati</th>"+
+        "<th>İniş Saati</th>"+
+        "<th>Fiyat</th>"+
+        "<th>Uçuş Süresi</th>"+
+            "</tr>";
+
+    for (let i = 0; i < deneme.length; i++) {
+        var kalkis_zamani = deneme[i].departureTime.slice(11,16);
+        var inis_zamani = deneme[i].arrivalTime.slice(11,16);
+        var kalkis_yeri = deneme[i].departureAirport.name;
+        var inis_yeri = deneme[i].arrivalAirport.name;
+        var fiyat = deneme[i].fareOptionList[0].totalPriceInRequestedCurrency;
+        var ucus_zamani = deneme[i].flightList[0].durationInMinutes;
+        var sirket = deneme[i].flightList[0].flightOperator.name;
+        var table = document.getElementById("ucuslar_table");
+        var satir = '<tr>'+
+            '<td>'+(i+1) +'</td>'+
+            '<td>'+sirket +'</td>'+
+            '<td>'+kalkis_yeri +'</td>'+
+            '<td>'+inis_yeri +'</td>'+
+            '<td>'+kalkis_zamani +'</td>'+
+            '<td>'+inis_zamani +'</td>'+
+            '<td>'+fiyat +'</td>'+
+            '<td>'+ucus_zamani +'</td>'+
+                '</tr>';
+    table.innerHTML += satir;
+        }
+
+    document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
+            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button onclick='fiyatCoktanAzaDogruSirala()'>Fiyat</button>"+
+            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+}
+// Fiyat Çoktan Aza Sıralama
+function fiyatCoktanAzaDogruSirala() {
+    var table = document.getElementById("ucuslar_table");
+    var deneme = jsonData.response.itineraryList[0].flightOptionList.sort(function(a, b){
+    return a.fareOptionList[0].totalPriceInRequestedCurrency - b.fareOptionList[0].totalPriceInRequestedCurrency;
+});
+    deneme = deneme.reverse();
+    table.innerHTML = "<tr>"+
+        "<th>#</th>"+
+        "<th>Şirket</th>"+
+        "<th>Kalkış Yeri</th>"+
+        "<th>İniş Yeri</th>"+
+        "<th>Kalkış Saati</th>"+
+        "<th>İniş Saati</th>"+
+        "<th>Fiyat</th>"+
+        "<th>Uçuş Süresi</th>"+
+            "</tr>";
+
+    for (let i = 0; i < deneme.length; i++) {
+        var kalkis_zamani = deneme[i].departureTime.slice(11,16);
+        var inis_zamani = deneme[i].arrivalTime.slice(11,16);
+        var kalkis_yeri = deneme[i].departureAirport.name;
+        var inis_yeri = deneme[i].arrivalAirport.name;
+        var fiyat = deneme[i].fareOptionList[0].totalPriceInRequestedCurrency;
+        var ucus_zamani = deneme[i].flightList[0].durationInMinutes;
+        var sirket = deneme[i].flightList[0].flightOperator.name;
+        var table = document.getElementById("ucuslar_table");
+        var satir = '<tr>'+
+            '<td>'+(i+1) +'</td>'+
+            '<td>'+sirket +'</td>'+
+            '<td>'+kalkis_yeri +'</td>'+
+            '<td>'+inis_yeri +'</td>'+
+            '<td>'+kalkis_zamani +'</td>'+
+            '<td>'+inis_zamani +'</td>'+
+            '<td>'+fiyat +'</td>'+
+            '<td>'+ucus_zamani +'</td>'+
+                '</tr>';
+    table.innerHTML += satir;
+        }
+
+    document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
+            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+}
+
+// Uçuş Süresi - Azdan Çoğa Sıralama
+function ucusSuresiAzdanCokaSiralama(){
+    var table = document.getElementById("ucuslar_table");
+    var deneme = jsonData.response.itineraryList[0].flightOptionList.sort(function(a, b){
+    return a.flightList[0].durationInMinutes - b.flightList[0].durationInMinutes;
+});
+
+    table.innerHTML = "<tr>"+
+        "<th>#</th>"+
+        "<th>Şirket</th>"+
+        "<th>Kalkış Yeri</th>"+
+        "<th>İniş Yeri</th>"+
+        "<th>Kalkış Saati</th>"+
+        "<th>İniş Saati</th>"+
+        "<th>Fiyat</th>"+
+        "<th>Uçuş Süresi</th>"+
+            "</tr>";
+
+    for (let i = 0; i < deneme.length; i++) {
+        var kalkis_zamani = deneme[i].departureTime.slice(11,16);
+        var inis_zamani = deneme[i].arrivalTime.slice(11,16);
+        var kalkis_yeri = deneme[i].departureAirport.name;
+        var inis_yeri = deneme[i].arrivalAirport.name;
+        var fiyat = deneme[i].fareOptionList[0].totalPriceInRequestedCurrency;
+        var ucus_zamani = deneme[i].flightList[0].durationInMinutes;
+        var sirket = deneme[i].flightList[0].flightOperator.name;
+        var table = document.getElementById("ucuslar_table");
+        var satir = '<tr>'+
+            '<td>'+(i+1) +'</td>'+
+            '<td>'+sirket +'</td>'+
+            '<td>'+kalkis_yeri +'</td>'+
+            '<td>'+inis_yeri +'</td>'+
+            '<td>'+kalkis_zamani +'</td>'+
+            '<td>'+inis_zamani +'</td>'+
+            '<td>'+fiyat +'</td>'+
+            '<td>'+ucus_zamani +'</td>'+
+                '</tr>';
+    table.innerHTML += satir;
+        }
+
+    document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
+            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button onclick='ucusSuresiCoktanAzaSiralama()'>Uçuş Süresi</button>";
+}
+
+// Uçuş Süresi - Çoktan Aza Sıralama
+function ucusSuresiCoktanAzaSiralama() {
+    var table = document.getElementById("ucuslar_table");
+    var deneme = jsonData.response.itineraryList[0].flightOptionList.sort(function(a, b){
+    return a.flightList[0].durationInMinutes - b.flightList[0].durationInMinutes;
+});
+    deneme = deneme.reverse();  
+    table.innerHTML = "<tr>"+
+        "<th>#</th>"+
+        "<th>Şirket</th>"+
+        "<th>Kalkış Yeri</th>"+
+        "<th>İniş Yeri</th>"+
+        "<th>Kalkış Saati</th>"+
+        "<th>İniş Saati</th>"+
+        "<th>Fiyat</th>"+
+        "<th>Uçuş Süresi</th>"+
+            "</tr>";
+
+    for (let i = 0; i < deneme.length; i++) {
+        var kalkis_zamani = deneme[i].departureTime.slice(11,16);
+        var inis_zamani = deneme[i].arrivalTime.slice(11,16);
+        var kalkis_yeri = deneme[i].departureAirport.name;
+        var inis_yeri = deneme[i].arrivalAirport.name;
+        var fiyat = deneme[i].fareOptionList[0].totalPriceInRequestedCurrency;
+        var ucus_zamani = deneme[i].flightList[0].durationInMinutes;
+        var sirket = deneme[i].flightList[0].flightOperator.name;
+        var table = document.getElementById("ucuslar_table");
+        var satir = '<tr>'+
+            '<td>'+(i+1) +'</td>'+
+            '<td>'+sirket +'</td>'+
+            '<td>'+kalkis_yeri +'</td>'+
+            '<td>'+inis_yeri +'</td>'+
+            '<td>'+kalkis_zamani +'</td>'+
+            '<td>'+inis_zamani +'</td>'+
+            '<td>'+fiyat +'</td>'+
+            '<td>'+ucus_zamani +'</td>'+
+                '</tr>';
+    table.innerHTML += satir;
+        }
+
+    document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
+            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+}
+
+// Şirket Adına Göre Sıralama
+function sirketAdinaGoreSirala() {
+    var table = document.getElementById("ucuslar_table");
+    var deneme = jsonData.response.itineraryList[0].flightOptionList.sort(function(a, b){
+        if(a.flightList[0].flightOperator.name < b.flightList[0].flightOperator.name) { return -1; }
+        if(a.flightList[0].flightOperator.name > b.flightList[0].flightOperator.name) { return 1; }
+        return 0;
+});
+
+    table.innerHTML = "<tr>"+
+        "<th>#</th>"+
+        "<th>Şirket</th>"+
+        "<th>Kalkış Yeri</th>"+
+        "<th>İniş Yeri</th>"+
+        "<th>Kalkış Saati</th>"+
+        "<th>İniş Saati</th>"+
+        "<th>Fiyat</th>"+
+        "<th>Uçuş Süresi</th>"+
+            "</tr>";
+
+    for (let i = 0; i < deneme.length; i++) {
+        var kalkis_zamani = deneme[i].departureTime.slice(11,16);
+        var inis_zamani = deneme[i].arrivalTime.slice(11,16);
+        var kalkis_yeri = deneme[i].departureAirport.name;
+        var inis_yeri = deneme[i].arrivalAirport.name;
+        var fiyat = deneme[i].fareOptionList[0].totalPriceInRequestedCurrency;
+        var ucus_zamani = deneme[i].flightList[0].durationInMinutes;
+        var sirket = deneme[i].flightList[0].flightOperator.name;
+        var table = document.getElementById("ucuslar_table");
+        var satir = '<tr>'+
+            '<td>'+(i+1) +'</td>'+
+            '<td>'+sirket +'</td>'+
+            '<td>'+kalkis_yeri +'</td>'+
+            '<td>'+inis_yeri +'</td>'+
+            '<td>'+kalkis_zamani +'</td>'+
+            '<td>'+inis_zamani +'</td>'+
+            '<td>'+fiyat +'</td>'+
+            '<td>'+ucus_zamani +'</td>'+
+                '</tr>';
+    table.innerHTML += satir;
+        }
+
+    document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
+            "<button onclick='terstenSirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+}
+
+// Tersten Şirket Adına Göre Sıralama
+function terstenSirketAdinaGoreSirala() {
+    var table = document.getElementById("ucuslar_table");
+    var deneme = jsonData.response.itineraryList[0].flightOptionList.sort(function(a, b){
+        if(a.flightList[0].flightOperator.name < b.flightList[0].flightOperator.name) { return -1; }
+        if(a.flightList[0].flightOperator.name > b.flightList[0].flightOperator.name) { return 1; }
+        return 0;
+});
+    deneme = deneme.reverse();
+    table.innerHTML = "<tr>"+
+        "<th>#</th>"+
+        "<th>Şirket</th>"+
+        "<th>Kalkış Yeri</th>"+
+        "<th>İniş Yeri</th>"+
+        "<th>Kalkış Saati</th>"+
+        "<th>İniş Saati</th>"+
+        "<th>Fiyat</th>"+
+        "<th>Uçuş Süresi</th>"+
+            "</tr>";
+
+    for (let i = 0; i < deneme.length; i++) {
+        var kalkis_zamani = deneme[i].departureTime.slice(11,16);
+        var inis_zamani = deneme[i].arrivalTime.slice(11,16);
+        var kalkis_yeri = deneme[i].departureAirport.name;
+        var inis_yeri = deneme[i].arrivalAirport.name;
+        var fiyat = deneme[i].fareOptionList[0].totalPriceInRequestedCurrency;
+        var ucus_zamani = deneme[i].flightList[0].durationInMinutes;
+        var sirket = deneme[i].flightList[0].flightOperator.name;
+        var table = document.getElementById("ucuslar_table");
+        var satir = '<tr>'+
+            '<td>'+(i+1) +'</td>'+
+            '<td>'+sirket +'</td>'+
+            '<td>'+kalkis_yeri +'</td>'+
+            '<td>'+inis_yeri +'</td>'+
+            '<td>'+kalkis_zamani +'</td>'+
+            '<td>'+inis_zamani +'</td>'+
+            '<td>'+fiyat +'</td>'+
+            '<td>'+ucus_zamani +'</td>'+
+                '</tr>';
+    table.innerHTML += satir;
+        }
+
+    document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
+            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+}
+
+
+// Kalkış Saati - Azdan Çoğa Sıralama
+function kalkisSaatiAzdanCogaSiralama() {
+    var table = document.getElementById("ucuslar_table");
+    var deneme = jsonData.response.itineraryList[0].flightOptionList.sort(function(a, b){
+    return a.departureTime.slice(11,16).localeCompare(b.departureTime.slice(11,16));
+});
+    table.innerHTML = "<tr>"+
+        "<th>#</th>"+
+        "<th>Şirket</th>"+
+        "<th>Kalkış Yeri</th>"+
+        "<th>İniş Yeri</th>"+
+        "<th>Kalkış Saati</th>"+
+        "<th>İniş Saati</th>"+
+        "<th>Fiyat</th>"+
+        "<th>Uçuş Süresi</th>"+
+            "</tr>";
+
+    for (let i = 0; i < deneme.length; i++) {
+        var kalkis_zamani = deneme[i].departureTime.slice(11,16);
+        var inis_zamani = deneme[i].arrivalTime.slice(11,16);
+        var kalkis_yeri = deneme[i].departureAirport.name;
+        var inis_yeri = deneme[i].arrivalAirport.name;
+        var fiyat = deneme[i].fareOptionList[0].totalPriceInRequestedCurrency;
+        var ucus_zamani = deneme[i].flightList[0].durationInMinutes;
+        var sirket = deneme[i].flightList[0].flightOperator.name;
+        var table = document.getElementById("ucuslar_table");
+        var satir = '<tr>'+
+            '<td>'+(i+1) +'</td>'+
+            '<td>'+sirket +'</td>'+
+            '<td>'+kalkis_yeri +'</td>'+
+            '<td>'+inis_yeri +'</td>'+
+            '<td>'+kalkis_zamani +'</td>'+
+            '<td>'+inis_zamani +'</td>'+
+            '<td>'+fiyat +'</td>'+
+            '<td>'+ucus_zamani +'</td>'+
+                '</tr>';
+    table.innerHTML += satir;
+        }
+
+    document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
+            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button onclick='kalkisSaatiCoktanAzaSiralama()'>Kalkış</button>"+
+            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+    
+}
+// Kalkış Saati - Çoktan Aza Sıralama
+function kalkisSaatiCoktanAzaSiralama() {
+    var table = document.getElementById("ucuslar_table");
+    var deneme = jsonData.response.itineraryList[0].flightOptionList.sort(function(a, b){
+    return a.departureTime.slice(11,16).localeCompare(b.departureTime.slice(11,16));
+});
+    deneme = deneme.reverse();  
+    table.innerHTML = "<tr>"+
+        "<th>#</th>"+
+        "<th>Şirket</th>"+
+        "<th>Kalkış Yeri</th>"+
+        "<th>İniş Yeri</th>"+
+        "<th>Kalkış Saati</th>"+
+        "<th>İniş Saati</th>"+
+        "<th>Fiyat</th>"+
+        "<th>Uçuş Süresi</th>"+
+            "</tr>";
+
+    for (let i = 0; i < deneme.length; i++) {
+        var kalkis_zamani = deneme[i].departureTime.slice(11,16);
+        var inis_zamani = deneme[i].arrivalTime.slice(11,16);
+        var kalkis_yeri = deneme[i].departureAirport.name;
+        var inis_yeri = deneme[i].arrivalAirport.name;
+        var fiyat = deneme[i].fareOptionList[0].totalPriceInRequestedCurrency;
+        var ucus_zamani = deneme[i].flightList[0].durationInMinutes;
+        var sirket = deneme[i].flightList[0].flightOperator.name;
+        var table = document.getElementById("ucuslar_table");
+        var satir = '<tr>'+
+            '<td>'+(i+1) +'</td>'+
+            '<td>'+sirket +'</td>'+
+            '<td>'+kalkis_yeri +'</td>'+
+            '<td>'+inis_yeri +'</td>'+
+            '<td>'+kalkis_zamani +'</td>'+
+            '<td>'+inis_zamani +'</td>'+
+            '<td>'+fiyat +'</td>'+
+            '<td>'+ucus_zamani +'</td>'+
+                '</tr>';
+    table.innerHTML += satir;
+        }
+
+    document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
+            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+}
+// İniş Saati - Azdan Çoğa Sıralama
+function inisSaatiAzdanCogaSiralama() {
+    var table = document.getElementById("ucuslar_table");
+    var deneme = jsonData.response.itineraryList[0].flightOptionList.sort(function(a, b){
+    return a.arrivalTime.slice(11,16).localeCompare(b.arrivalTime.slice(11,16));
+});
+
+    table.innerHTML = "<tr>"+
+        "<th>#</th>"+
+        "<th>Şirket</th>"+
+        "<th>Kalkış Yeri</th>"+
+        "<th>İniş Yeri</th>"+
+        "<th>Kalkış Saati</th>"+
+        "<th>İniş Saati</th>"+
+        "<th>Fiyat</th>"+
+        "<th>Uçuş Süresi</th>"+
+            "</tr>";
+
+    for (let i = 0; i < deneme.length; i++) {
+        var kalkis_zamani = deneme[i].departureTime.slice(11,16);
+        var inis_zamani = deneme[i].arrivalTime.slice(11,16);
+        var kalkis_yeri = deneme[i].departureAirport.name;
+        var inis_yeri = deneme[i].arrivalAirport.name;
+        var fiyat = deneme[i].fareOptionList[0].totalPriceInRequestedCurrency;
+        var ucus_zamani = deneme[i].flightList[0].durationInMinutes;
+        var sirket = deneme[i].flightList[0].flightOperator.name;
+        var table = document.getElementById("ucuslar_table");
+        var satir = '<tr>'+
+            '<td>'+(i+1) +'</td>'+
+            '<td>'+sirket +'</td>'+
+            '<td>'+kalkis_yeri +'</td>'+
+            '<td>'+inis_yeri +'</td>'+
+            '<td>'+kalkis_zamani +'</td>'+
+            '<td>'+inis_zamani +'</td>'+
+            '<td>'+fiyat +'</td>'+
+            '<td>'+ucus_zamani +'</td>'+
+                '</tr>';
+    table.innerHTML += satir;
+        }
+
+    document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
+            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button onclick='inisSaatiCoktanAzaSiralama()'>İniş</button>"+
+            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+}
+// İniş Saati - Çoktan Aza Sıralama
+function inisSaatiCoktanAzaSiralama() {
+    var table = document.getElementById("ucuslar_table");
+    var deneme = jsonData.response.itineraryList[0].flightOptionList.sort(function(a, b){
+    return a.arrivalTime.slice(11,16).localeCompare(b.arrivalTime.slice(11,16));
+});
+    deneme = deneme.reverse();  
+    table.innerHTML = "<tr>"+
+        "<th>#</th>"+
+        "<th>Şirket</th>"+
+        "<th>Kalkış Yeri</th>"+
+        "<th>İniş Yeri</th>"+
+        "<th>Kalkış Saati</th>"+
+        "<th>İniş Saati</th>"+
+        "<th>Fiyat</th>"+
+        "<th>Uçuş Süresi</th>"+
+            "</tr>";
+
+    for (let i = 0; i < deneme.length; i++) {
+        var kalkis_zamani = deneme[i].departureTime.slice(11,16);
+        var inis_zamani = deneme[i].arrivalTime.slice(11,16);
+        var kalkis_yeri = deneme[i].departureAirport.name;
+        var inis_yeri = deneme[i].arrivalAirport.name;
+        var fiyat = deneme[i].fareOptionList[0].totalPriceInRequestedCurrency;
+        var ucus_zamani = deneme[i].flightList[0].durationInMinutes;
+        var sirket = deneme[i].flightList[0].flightOperator.name;
+        var table = document.getElementById("ucuslar_table");
+        var satir = '<tr>'+
+            '<td>'+(i+1) +'</td>'+
+            '<td>'+sirket +'</td>'+
+            '<td>'+kalkis_yeri +'</td>'+
+            '<td>'+inis_yeri +'</td>'+
+            '<td>'+kalkis_zamani +'</td>'+
+            '<td>'+inis_zamani +'</td>'+
+            '<td>'+fiyat +'</td>'+
+            '<td>'+ucus_zamani +'</td>'+
+                '</tr>';
+    table.innerHTML += satir;
+        }
+
+    document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
+            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+}
 </script>
  <script src="https://kit.fontawesome.com/35e8266fdf.js" crossorigin="anonymous"></script>
 </body>

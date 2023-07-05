@@ -338,3 +338,23 @@ hr {
         width: 100%;
     }
 }
+
+.ucuslar_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+th {
+    padding: 10px;
+    border: #000 1px solid;
+}
+
+td {
+    justify-content: center;
+    text-align: center;
+    border: #000 1px solid;
+}
