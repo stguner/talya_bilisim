@@ -3,14 +3,7 @@
 <head>
     <title>Anasayfa</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
@@ -46,16 +39,16 @@
     </section>
     
     <section class="ucuslar_container">
-        <div id="siralama" class="siralama">
+        <div id="siralama" class="siralama" style="margin-bottom:10px;">
             <label for="Sıralama">Sıralama</label>
-            <button onclick="sirketAdinaGoreSirala()">Şirket Adı</button>
-            <button onclick="fiyatAzdanCogaGoreSirala()">Fiyat</button>
-            <button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>
-            <button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>
-            <button onclick="ucusSuresiAzdanCokaSiralama()">Uçuş Süresi</button>
+            <button class="btn btn-primary" onclick="sirketAdinaGoreSirala()">Şirket Adı</button>
+            <button class="btn btn-primary" onclick="fiyatAzdanCogaGoreSirala()">Fiyat</button>
+            <button class="btn btn-primary" onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>
+            <button class="btn btn-primary" onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>
+            <button class="btn btn-primary" onclick="ucusSuresiAzdanCokaSiralama()">Uçuş Süresi</button>
         </div>
         <div class="ucuslar_table_container">
-            <table id="ucuslar_table">
+            <table class="table table table-hover" id="ucuslar_table">
                 <tr>
                   <th>#</th>
                   <th>Şirket</th>
@@ -193,11 +186,11 @@ function fiyatAzdanCogaGoreSirala(){
         }
 
     document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
-            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
-            "<button onclick='fiyatCoktanAzaDogruSirala()'>Fiyat</button>"+
-            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
-            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
-            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+            "<button class='btn btn-primary' onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button class='btn btn-primary' onclick='fiyatCoktanAzaDogruSirala()'>Fiyat</button>"+
+            "<button class='btn btn-primary' onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button class='btn btn-primary' onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button class='btn btn-primary' onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
 }
 // Fiyat Çoktan Aza Sıralama
 function fiyatCoktanAzaDogruSirala() {
@@ -240,11 +233,11 @@ function fiyatCoktanAzaDogruSirala() {
         }
 
     document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
-            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
-            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
-            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
-            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
-            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+            "<button class='btn btn-primary' onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button class='btn btn-primary' onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button class='btn btn-primary' onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button class='btn btn-primary' onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button class='btn btn-primary' onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
 }
 
 // Uçuş Süresi - Azdan Çoğa Sıralama
@@ -288,11 +281,11 @@ function ucusSuresiAzdanCokaSiralama(){
         }
 
     document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
-            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
-            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
-            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
-            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
-            "<button onclick='ucusSuresiCoktanAzaSiralama()'>Uçuş Süresi</button>";
+            "<button class='btn btn-primary' onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button class='btn btn-primary' onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button class='btn btn-primary' onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button class='btn btn-primary' onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button class='btn btn-primary' onclick='ucusSuresiCoktanAzaSiralama()'>Uçuş Süresi</button>";
 }
 
 // Uçuş Süresi - Çoktan Aza Sıralama
@@ -336,11 +329,11 @@ function ucusSuresiCoktanAzaSiralama() {
         }
 
     document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
-            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
-            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
-            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
-            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
-            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+            "<button class='btn btn-primary' onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button class='btn btn-primary' onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button class='btn btn-primary' onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button class='btn btn-primary' onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button class='btn btn-primary' onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
 }
 
 // Şirket Adına Göre Sıralama
@@ -386,11 +379,11 @@ function sirketAdinaGoreSirala() {
         }
 
     document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
-            "<button onclick='terstenSirketAdinaGoreSirala()'>Şirket Adı</button>"+
-            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
-            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
-            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
-            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+            "<button class='btn btn-primary' onclick='terstenSirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button class='btn btn-primary' onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button class='btn btn-primary' onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button class='btn btn-primary' onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button class='btn btn-primary' onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
 }
 
 // Tersten Şirket Adına Göre Sıralama
@@ -436,11 +429,11 @@ function terstenSirketAdinaGoreSirala() {
         }
 
     document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
-            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
-            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
-            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
-            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
-            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+            "<button class='btn btn-primary' onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button class='btn btn-primary' onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button class='btn btn-primary' onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button class='btn btn-primary' onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button class='btn btn-primary' onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
 }
 
 
@@ -484,11 +477,11 @@ function kalkisSaatiAzdanCogaSiralama() {
         }
 
     document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
-            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
-            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
-            "<button onclick='kalkisSaatiCoktanAzaSiralama()'>Kalkış</button>"+
-            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
-            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+            "<button class='btn btn-primary' onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button class='btn btn-primary' onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button class='btn btn-primary' onclick='kalkisSaatiCoktanAzaSiralama()'>Kalkış</button>"+
+            "<button class='btn btn-primary' onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button class='btn btn-primary' onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
     
 }
 // Kalkış Saati - Çoktan Aza Sıralama
@@ -532,11 +525,11 @@ function kalkisSaatiCoktanAzaSiralama() {
         }
 
     document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
-            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
-            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
-            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
-            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
-            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+            "<button class='btn btn-primary' onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button class='btn btn-primary' onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button class='btn btn-primary' onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button class='btn btn-primary' onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button class='btn btn-primary' onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
 }
 // İniş Saati - Azdan Çoğa Sıralama
 function inisSaatiAzdanCogaSiralama() {
@@ -579,11 +572,11 @@ function inisSaatiAzdanCogaSiralama() {
         }
 
     document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
-            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
-            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
-            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
-            "<button onclick='inisSaatiCoktanAzaSiralama()'>İniş</button>"+
-            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+            "<button class='btn btn-primary' onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button class='btn btn-primary' onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button class='btn btn-primary' onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button class='btn btn-primary' onclick='inisSaatiCoktanAzaSiralama()'>İniş</button>"+
+            "<button class='btn btn-primary' onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
 }
 // İniş Saati - Çoktan Aza Sıralama
 function inisSaatiCoktanAzaSiralama() {
@@ -626,13 +619,17 @@ function inisSaatiCoktanAzaSiralama() {
         }
 
     document.getElementById("siralama").innerHTML = "<label for='Sıralama'>Sıralama</label>"+
-            "<button onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
-            "<button onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
-            "<button onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
-            "<button onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
-            "<button onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
+            "<button class='btn btn-primary' onclick='sirketAdinaGoreSirala()'>Şirket Adı</button>"+
+            "<button class='btn btn-primary' onclick='fiyatAzdanCogaGoreSirala()'>Fiyat</button>"+
+            "<button class='btn btn-primary' onclick='kalkisSaatiAzdanCogaSiralama()'>Kalkış</button>"+
+            "<button class='btn btn-primary' onclick='inisSaatiAzdanCogaSiralama()'>İniş</button>"+
+            "<button class='btn btn-primary' onclick='ucusSuresiAzdanCokaSiralama()'>Uçuş Süresi</button>";
 }
 </script>
  <script src="https://kit.fontawesome.com/35e8266fdf.js" crossorigin="anonymous"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
 </body>
 </html>
